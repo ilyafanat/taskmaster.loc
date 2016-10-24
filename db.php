@@ -17,7 +17,7 @@ class MyDB
 
     public function getTasks()
     {
-        return $this->connection->query('select * from Tasks')->fetchAll();
+        return $this->connection->query('select id, name, parent_id from Tasks')->fetchAll(PDO::FETCH_ASSOC);
     }
 }
 

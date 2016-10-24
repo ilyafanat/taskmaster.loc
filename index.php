@@ -16,7 +16,7 @@ if ($url === '/getTasks') {
     var_dump($db->getTasks());
 }
 if ($url === '/getAllTasks') {
-    echo json_encode(count($db->getTasks()));
+    echo json_encode($db->getTasks());
     exit;
 }
 //phpinfo();

@@ -6,22 +6,22 @@ var xhr = new XMLHttpRequest();
 
 addTaskButton.addEventListener('click', addTask);
 
-function createNewTaskElement(taskString, parent_id) {
+function createNewTaskElement(task) {
     var list = document.createElement('ul');
     var listItem = document.createElement("li");
     var label = document.createElement("label");
 
-    label.innerText = taskString;
+    label.innerText = task.name;
     label.setAttribute('contentEditable', 'true');
 
     listItem.appendChild(label);
     bindTaskEvents(listItem);
     list.appendChild(listItem);
-    if (parent_id) {
-        list.dataset.parentId = parent_id;
-        list.dataset.id = count++;
-    }
-    addTaskToDB(taskString, parent_id);
+    //if (parent_id) {
+    list.dataset.parentId = task.parent_id;
+    list.dataset.id = task.id;
+    //}
+    //addTaskToDB(taskString, parent_id);
     return list;
 }
 
@@ -32,7 +32,7 @@ function addTask() {
     }
 
     var listItem = createNewTaskElement(taskName);
-    listItem.dataset.id = count++;
+    //listItem.dataset.id = count++;
     incompleteTaskHolder.appendChild(listItem);
     // bindTaskEvents(listItem);
 }
@@ -52,8 +52,8 @@ function bindTaskEvents(taskListItem) {
     ;
 
     addButton.addEventListener('click', event => {
-        console.log(taskListItem.parentNode.dataset.id);
-    taskListItem.appendChild(createNewTaskElement('new subtask', taskListItem.parentNode.dataset.id))
+        //console.log(taskListItem.parentNode.dataset.id);
+        taskListItem.appendChild(createNewTaskElement('new subtask', taskListItem.parentNode.dataset.id))
 })
     ;
 
@@ -71,13 +71,27 @@ function addTaskToDB(text, parent_id) {
 }
 
 document.addEventListener('DOMContentLoaded', function () {
-
+    xhr.onreadystatechange = function () {
+        if (xhr.readyState == XMLHttpRequest.DONE) {
+            var tasks = xhr.response;
+            var c
+            tasks.forEach(function (item, count) {
+                createTree(item);
+            });
+        }
+    };
     xhr.open("GET", '/getAllTasks', true);
-    // xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-    // if (!parent_id) {
-    //     parent_id = 0;
-    // }
+    xhr.responseType = 'json';
     xhr.send();
-    count = xhr.response;
-    console.log(xhr.responseText);
+
 }, false);
+
+function createTree(item) {
+    if (item.parent_id == 0) {
+        incompleteTaskHolder.appendChild(createNewTaskElement(item));
+    } else {
+        var elem = document.querySelectorAll("[data-id='" + item.parent_id + "']");
+        console.log("[data-id='" + item.parent_id + "']");
+        elem.appendChild(createNewTaskElement(item));
+    }
+}
