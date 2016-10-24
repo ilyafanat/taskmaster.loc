@@ -1,22 +1,28 @@
 <?php
+
 ini_set("display_errors", 1);
 ini_set("track_errors", 1);
 ini_set("html_errors", 1);
 error_reporting(E_ALL);
-//phpinfo();
-require_once 'templates/header.php';
 require_once 'db.php';
-
 $url = $_SERVER['REQUEST_URI'];
 
 $db = new MyDB();
 
 if ($url === '/addTask') {
-    $db->insertTask($_POST['name']);
+    $db->insertTask($_POST['name'], $_POST['parent_id']);
 }
 if ($url === '/getTasks') {
     var_dump($db->getTasks());
 }
+if ($url === '/getAllTasks') {
+    echo json_encode(count($db->getTasks()));
+    exit;
+}
+//phpinfo();
+require_once 'templates/header.php';
+
+
 ?>
     <div class="">
         <input type="text" id="task-text">

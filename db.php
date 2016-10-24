@@ -10,9 +10,9 @@ class MyDB
         $this->connection = new PDO("sqlite:task_master.db");
     }
 
-    public function insertTask($text)
+    public function insertTask($text, $parent_id)
     {
-        return $this->connection->exec("INSERT INTO Tasks (name) VALUES ('" . $text . "');");
+        return $this->connection->exec("INSERT INTO Tasks (name, parent_id) VALUES ('" . $text . "', '".$parent_id."');");
     }
 
     public function getTasks()

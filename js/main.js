@@ -1,21 +1,27 @@
 var taskText = document.getElementById('task-text');
 var incompleteTaskHolder = document.getElementById('incomplete-task');
 var addTaskButton = document.getElementById("add-task");
-var count = 0;
+var count;
+var xhr = new XMLHttpRequest();
+
 addTaskButton.addEventListener('click', addTask);
 
-function createNewTaskElement(taskString) {
+function createNewTaskElement(taskString, parent_id) {
     var list = document.createElement('ul');
     var listItem = document.createElement("li");
     var label = document.createElement("label");
-    // label.dataset.parentId = count++;
+
     label.innerText = taskString;
     label.setAttribute('contentEditable', 'true');
 
     listItem.appendChild(label);
     bindTaskEvents(listItem);
     list.appendChild(listItem);
-    addTaskToDB(taskString);
+    if (parent_id) {
+        list.dataset.parentId = parent_id;
+        list.dataset.id = count++;
+    }
+    addTaskToDB(taskString, parent_id);
     return list;
 }
 
@@ -41,12 +47,13 @@ function bindTaskEvents(taskListItem) {
     deleteButton.innerText = "Delete";
     deleteButton.className = "delete";
 
-    deleteButton.addEventListener('click', event = > taskListItem.parentNode.removeChild(taskListItem)
+    deleteButton.addEventListener('click', event => taskListItem.parentNode.removeChild(taskListItem)
 )
     ;
 
-    addButton.addEventListener('click', event = > {
-        taskListItem.appendChild(createNewTaskElement('new subtask'))
+    addButton.addEventListener('click', event => {
+        console.log(taskListItem.parentNode.dataset.id);
+    taskListItem.appendChild(createNewTaskElement('new subtask', taskListItem.parentNode.dataset.id))
 })
     ;
 
@@ -54,11 +61,23 @@ function bindTaskEvents(taskListItem) {
     taskListItem.appendChild(deleteButton);
 }
 
-function addTaskToDB(text) {
-    var xhr = new XMLHttpRequest();
-
-    xhr.open("POST", '/addTask', true)
-    xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded')
-
-    xhr.send('name=' + text);
+function addTaskToDB(text, parent_id) {
+    xhr.open("POST", '/addTask', true);
+    xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+    if (!parent_id) {
+        parent_id = 0;
+    }
+    xhr.send('name=' + text + "&parent_id=" + parent_id);
 }
+
+document.addEventListener('DOMContentLoaded', function () {
+
+    xhr.open("GET", '/getAllTasks', true);
+    // xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+    // if (!parent_id) {
+    //     parent_id = 0;
+    // }
+    xhr.send();
+    count = xhr.response;
+    console.log(xhr.responseText);
+}, false);
