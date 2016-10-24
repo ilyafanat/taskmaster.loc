@@ -2,11 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="af62b85a-ac0d-4b8f-bde8-aa07c4a5bd23" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/deployment.xml" afterPath="$PROJECT_DIR$/.idea/deployment.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/task_master.db" afterPath="$PROJECT_DIR$/task_master.db" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/index.php" afterPath="$PROJECT_DIR$/index.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/js/main.js" afterPath="$PROJECT_DIR$/js/main.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates/header.php" afterPath="$PROJECT_DIR$/templates/header.php" />
     </list>
     <ignored path="TaskMaster.loc.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -27,16 +25,16 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="index.php" pinned="false" current-in-tab="true">
+      <file leaf-file-name="index.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/index.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="306">
-              <caret line="17" column="28" selection-start-line="17" selection-start-column="28" selection-end-line="17" selection-end-column="28" />
+            <state relative-caret-position="396">
+              <caret line="22" column="33" selection-start-line="22" selection-start-column="33" selection-end-line="22" selection-end-column="33" />
               <folding>
-                <marker date="1477320140490" expanded="true" signature="288:302" ph="INSERT INTO Tasks... " />
-                <marker date="1477320140490" expanded="true" signature="388:525" ph="..." />
-                <marker date="1477320140490" expanded="true" signature="585:645" ph="..." />
-                <marker date="1477320140490" expanded="true" signature="619:634" ph="..." />
+                <marker date="1477324421325" expanded="true" signature="288:302" ph="INSERT INTO Tasks... " />
+                <marker date="1477324421325" expanded="true" signature="388:489" ph="..." />
+                <marker date="1477324421325" expanded="true" signature="549:609" ph="..." />
+                <marker date="1477324421325" expanded="true" signature="583:598" ph="..." />
               </folding>
             </state>
           </provider>
@@ -76,11 +74,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="main.js" pinned="false" current-in-tab="false">
+      <file leaf-file-name="main.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/js/main.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="306">
-              <caret line="17" column="26" selection-start-line="17" selection-start-column="26" selection-end-line="17" selection-end-column="26" />
+            <state relative-caret-position="504">
+              <caret line="28" column="22" selection-start-line="28" selection-start-column="22" selection-end-line="28" selection-end-column="22" />
               <folding />
             </state>
           </provider>
@@ -109,9 +107,9 @@
         <option value="$PROJECT_DIR$/templates/header.php" />
         <option value="$PROJECT_DIR$/.htaccess" />
         <option value="$PROJECT_DIR$/css/style.css" />
-        <option value="$PROJECT_DIR$/js/main.js" />
         <option value="$PROJECT_DIR$/db.php" />
         <option value="$PROJECT_DIR$/index.php" />
+        <option value="$PROJECT_DIR$/js/main.js" />
       </list>
     </option>
   </component>
@@ -270,12 +268,12 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1477123297135</updated>
-      <workItem from="1477297194730" duration="22129000" />
+      <workItem from="1477297194730" duration="25668000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="22129000" />
+    <option name="totallyTimeSpent" value="25668000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="65" y="24" width="1855" height="1056" extended-state="6" />
@@ -325,10 +323,10 @@
         <state relative-caret-position="90">
           <caret line="5" column="22" selection-start-line="5" selection-start-column="22" selection-end-line="5" selection-end-column="22" />
           <folding>
-            <marker date="1477320140490" expanded="true" signature="288:302" ph="INSERT INTO Tasks... " />
-            <marker date="1477320140490" expanded="true" signature="388:525" ph="..." />
-            <marker date="1477320140490" expanded="true" signature="585:645" ph="..." />
-            <marker date="1477320140490" expanded="true" signature="619:634" ph="..." />
+            <marker date="1477324421325" expanded="true" signature="288:302" ph="INSERT INTO Tasks... " />
+            <marker date="1477324421325" expanded="true" signature="388:489" ph="..." />
+            <marker date="1477324421325" expanded="true" signature="549:609" ph="..." />
+            <marker date="1477324421325" expanded="true" signature="583:598" ph="..." />
           </folding>
         </state>
       </provider>
@@ -370,10 +368,10 @@
         <state relative-caret-position="0">
           <caret line="3" column="21" selection-start-line="3" selection-start-column="21" selection-end-line="3" selection-end-column="21" />
           <folding>
-            <marker date="1477320140490" expanded="true" signature="288:302" ph="INSERT INTO Tasks... " />
-            <marker date="1477320140490" expanded="true" signature="388:525" ph="..." />
-            <marker date="1477320140490" expanded="true" signature="585:645" ph="..." />
-            <marker date="1477320140490" expanded="true" signature="619:634" ph="..." />
+            <marker date="1477324421325" expanded="true" signature="288:302" ph="INSERT INTO Tasks... " />
+            <marker date="1477324421325" expanded="true" signature="388:489" ph="..." />
+            <marker date="1477324421325" expanded="true" signature="549:609" ph="..." />
+            <marker date="1477324421325" expanded="true" signature="583:598" ph="..." />
           </folding>
         </state>
       </provider>
@@ -417,14 +415,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/templates/header.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="72">
-          <caret line="4" column="65" selection-start-line="4" selection-start-column="65" selection-end-line="4" selection-end-column="65" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/.htaccess">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="54">
@@ -449,11 +439,16 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/js/main.js">
+    <entry file="file://$PROJECT_DIR$/index.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="306">
-          <caret line="17" column="26" selection-start-line="17" selection-start-column="26" selection-end-line="17" selection-end-column="26" />
-          <folding />
+        <state relative-caret-position="396">
+          <caret line="22" column="33" selection-start-line="22" selection-start-column="33" selection-end-line="22" selection-end-column="33" />
+          <folding>
+            <marker date="1477324421325" expanded="true" signature="288:302" ph="INSERT INTO Tasks... " />
+            <marker date="1477324421325" expanded="true" signature="388:489" ph="..." />
+            <marker date="1477324421325" expanded="true" signature="549:609" ph="..." />
+            <marker date="1477324421325" expanded="true" signature="583:598" ph="..." />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -469,16 +464,19 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/index.php">
+    <entry file="file://$PROJECT_DIR$/templates/header.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="306">
-          <caret line="17" column="28" selection-start-line="17" selection-start-column="28" selection-end-line="17" selection-end-column="28" />
-          <folding>
-            <marker date="1477320140490" expanded="true" signature="288:302" ph="INSERT INTO Tasks... " />
-            <marker date="1477320140490" expanded="true" signature="388:525" ph="..." />
-            <marker date="1477320140490" expanded="true" signature="585:645" ph="..." />
-            <marker date="1477320140490" expanded="true" signature="619:634" ph="..." />
-          </folding>
+        <state relative-caret-position="72">
+          <caret line="4" column="65" selection-start-line="4" selection-start-column="65" selection-end-line="4" selection-end-column="65" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/js/main.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="504">
+          <caret line="28" column="22" selection-start-line="28" selection-start-column="22" selection-end-line="28" selection-end-column="22" />
+          <folding />
         </state>
       </provider>
     </entry>

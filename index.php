@@ -21,7 +21,6 @@ if ($url === '/getTasks') {
     <div class="">
         <input type="text" id="task-text">
         <a href="#" id="add-task">Add task</a>
-        <a href="#">Delete task</a>
     </div>
     <h3>Incompleted Tasks</h3>
     <div class="added-task">

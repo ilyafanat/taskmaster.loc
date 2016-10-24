@@ -1,14 +1,14 @@
 var taskText = document.getElementById('task-text');
 var incompleteTaskHolder = document.getElementById('incomplete-task');
 var addTaskButton = document.getElementById("add-task");
-
+var count = 0;
 addTaskButton.addEventListener('click', addTask);
 
 function createNewTaskElement(taskString) {
     var list = document.createElement('ul');
     var listItem = document.createElement("li");
     var label = document.createElement("label");
-
+    // label.dataset.parentId = count++;
     label.innerText = taskString;
     label.setAttribute('contentEditable', 'true');
 
@@ -26,7 +26,8 @@ function addTask() {
     }
 
     var listItem = createNewTaskElement(taskName);
-     incompleteTaskHolder.appendChild(listItem);
+    listItem.dataset.id = count++;
+    incompleteTaskHolder.appendChild(listItem);
     // bindTaskEvents(listItem);
 }
 
@@ -36,21 +37,24 @@ function bindTaskEvents(taskListItem) {
 
     addButton.innerText = "Add Sub Task";
     addButton.className = "add-task";
+    // addButton.dataset.parentId = ;
     deleteButton.innerText = "Delete";
     deleteButton.className = "delete";
 
-    deleteButton.addEventListener('click', event => taskListItem.parentNode.removeChild(taskListItem));
+    deleteButton.addEventListener('click', event = > taskListItem.parentNode.removeChild(taskListItem)
+)
+    ;
 
-    addButton.addEventListener('click', event => {
-        taskListItem.appendChild(createNewTaskElement('new task'))
-    });
+    addButton.addEventListener('click', event = > {
+        taskListItem.appendChild(createNewTaskElement('new subtask'))
+})
+    ;
 
     taskListItem.appendChild(addButton);
     taskListItem.appendChild(deleteButton);
 }
 
 function addTaskToDB(text) {
-
     var xhr = new XMLHttpRequest();
 
     xhr.open("POST", '/addTask', true)
