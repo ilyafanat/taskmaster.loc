@@ -114,11 +114,8 @@ function addTaskToDB(item, callback) {
     }
     xhr.open("POST", '/task/' + item.name + '/parent_id/' + item.parent_id, true);
     xhr.onload = function () {
-        // if (xhr.readyState === XMLHttpRequest.DONE) {
-        console.log('otrabotal');
         item.id = xhr.getResponseHeader('Location').split('/')[2];
         callback(item);
-        // }
     };
     xhr.send();
 }
