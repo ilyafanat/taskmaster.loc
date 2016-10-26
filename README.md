@@ -1,9 +1,9 @@
 # taskmaster.loc
 to run PHP with built-in server:
-download
-cd /taskmaster.loc
-php -S 127.0.0.1:8080
+download</br>
+cd /taskmaster.loc</br>
+php -S 127.0.0.1:8080</br>
 
-php version: 7.08
+php version: 7.08</br>
 
 database created automatically
