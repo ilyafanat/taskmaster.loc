@@ -1,40 +1,88 @@
 var taskText = document.getElementById('task-text');
 var incompleteTaskHolder = document.getElementById('incomplete-task');
 var addTaskButton = document.getElementById("add-task");
-var count;
 var xhr = new XMLHttpRequest();
+var lastId = 0;
+var addedTask;
+window.onload = function () {
+    getTasks();
+};
 
 addTaskButton.addEventListener('click', addTask);
 
-function createNewTaskElement(task) {
+function getTasks() {
+    return new Promise(function (resolve, reject) {
+        xhr.open("GET", '/task', true);
+        xhr.responseType = 'json';
+        xhr.onload = function () {
+            var tasks = xhr.response;
+            if (typeof tasks != "undefined" && tasks != null && tasks.length > 0) {
+                lastId = tasks[tasks.length - 1].id;
+                tasks.forEach(function (item) {
+                    createTree(item);
+                });
+            }
+            resolve();
+        };
+        xhr.onerror = reject;
+        xhr.send();
+    });
+}
+
+function createNewTaskElement(task, add) {
+
+    if (add) {
+        return render(task);
+    } else {
+        addTaskToDB(task, getAddedTask);
+    }
+}
+
+function getAddedTask(data) {
+    // console.log('otrisoval');
+    if (data.parent_id === 0) {
+        incompleteTaskHolder.appendChild(render(data));
+    } else {
+        var listItem = document.querySelector("[data-id='" + data.parent_id + "']");
+        listItem.appendChild(render(data));
+    }
+    // render(data);
+}
+
+function render(task) {
+
     var list = document.createElement('ul');
     var listItem = document.createElement("li");
     var label = document.createElement("label");
 
-    label.innerText = task.name;
+    label.innerText = decodeURI(task.name);
     label.setAttribute('contentEditable', 'true');
-
     listItem.appendChild(label);
+    listItem.dataset.parentId = task.parent_id;
+    listItem.dataset.id = task.id;
+    bindEditEvent(label, listItem.dataset.id);
     bindTaskEvents(listItem);
     list.appendChild(listItem);
-    //if (parent_id) {
-    list.dataset.parentId = task.parent_id;
-    list.dataset.id = task.id;
-    //}
-    //addTaskToDB(taskString, parent_id);
+
     return list;
 }
 
 function addTask() {
-    var taskName = 'CustomTask';
-    if (taskText.value) {
-        taskName = taskText.value;
-    }
+    var task = {'name': 'CustomTask'};
 
-    var listItem = createNewTaskElement(taskName);
-    //listItem.dataset.id = count++;
-    incompleteTaskHolder.appendChild(listItem);
-    // bindTaskEvents(listItem);
+    if (taskText.value) {
+        task.name = taskText.value;
+    }
+    var listItem = createNewTaskElement(task);
+    listItem;
+}
+
+function bindEditEvent(label, id) {
+    label.addEventListener("blur", function () {
+        xhr.open("PUT", '/task/' + id + '/name/' + this.textContent, true);
+        xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+        xhr.send();
+    }, false);
 }
 
 function bindTaskEvents(taskListItem) {
@@ -43,55 +91,51 @@ function bindTaskEvents(taskListItem) {
 
     addButton.innerText = "Add Sub Task";
     addButton.className = "add-task";
-    // addButton.dataset.parentId = ;
     deleteButton.innerText = "Delete";
     deleteButton.className = "delete";
 
-    deleteButton.addEventListener('click', event => taskListItem.parentNode.removeChild(taskListItem)
-)
-    ;
+    var item = {'name': 'new subtask', 'parent_id': taskListItem.dataset.id};
+    deleteButton.addEventListener('click', event => {
+        deleteTask(taskListItem);
+        taskListItem.parentNode.removeChild(taskListItem);
+    });
 
     addButton.addEventListener('click', event => {
-        //console.log(taskListItem.parentNode.dataset.id);
-        taskListItem.appendChild(createNewTaskElement('new subtask', taskListItem.parentNode.dataset.id))
-})
-    ;
+        createNewTaskElement(item)
+    });
 
     taskListItem.appendChild(addButton);
     taskListItem.appendChild(deleteButton);
 }
 
-function addTaskToDB(text, parent_id) {
-    xhr.open("POST", '/addTask', true);
-    xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-    if (!parent_id) {
-        parent_id = 0;
+function addTaskToDB(item, callback) {
+    if (!item.parent_id) {
+        item.parent_id = 0;
     }
-    xhr.send('name=' + text + "&parent_id=" + parent_id);
+    xhr.open("POST", '/task/' + item.name + '/parent_id/' + item.parent_id, true);
+    xhr.onload = function () {
+        // if (xhr.readyState === XMLHttpRequest.DONE) {
+        console.log('otrabotal');
+        item.id = xhr.getResponseHeader('Location').split('/')[2];
+        callback(item);
+        // }
+    };
+    xhr.send();
 }
 
-document.addEventListener('DOMContentLoaded', function () {
-    xhr.onreadystatechange = function () {
-        if (xhr.readyState == XMLHttpRequest.DONE) {
-            var tasks = xhr.response;
-            var c
-            tasks.forEach(function (item, count) {
-                createTree(item);
-            });
-        }
-    };
-    xhr.open("GET", '/getAllTasks', true);
-    xhr.responseType = 'json';
-    xhr.send();
-
-}, false);
 
 function createTree(item) {
     if (item.parent_id == 0) {
-        incompleteTaskHolder.appendChild(createNewTaskElement(item));
+        incompleteTaskHolder.appendChild(createNewTaskElement(item, 'no'));
     } else {
-        var elem = document.querySelectorAll("[data-id='" + item.parent_id + "']");
-        console.log("[data-id='" + item.parent_id + "']");
-        elem.appendChild(createNewTaskElement(item));
+        var listItem = document.querySelector("[data-id='" + item.parent_id + "']");
+        listItem.appendChild(createNewTaskElement(item, 'no'));
     }
 }
+
+function deleteTask(item) {
+    xhr.open("DELETE", "/delete/" + item.dataset.id, true);
+    xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+    xhr.send();
+}
+
